@@ -8,7 +8,7 @@ document.getElementById("sendBtn").addEventListener("click", async function () {
   chatBox.appendChild(newMessage);
 
   // Send the user command to the Python backend
-  const response = await fetch("https://2e81-212-28-227-79.ngrok-free.app/run-command", {
+  const response = await fetch(" https://2e81-212-28-227-79.ngrok-free.app/run-command", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
