@@ -24,18 +24,18 @@ document.getElementById("sendBtn").addEventListener("click", async function () {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     if (result.js_code) {
-        await Excel.run(async (context) => {
-            try {
-                // Dynamically execute the received JavaScript code using eval()
-                eval(result.js_code);
-                await context.sync(); // Ensure all changes are applied
-            } catch (error) {
-                console.log(error);
-                var errorMessage = document.createElement("p");
-                errorMessage.textContent = "Error: " + error.message;
-                chatBox.appendChild(errorMessage);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-        });
-    }
+    await Excel.run(async (context) => {
+        try {
+            eval(result.js_code); // Evaluate the received JavaScript code
+            await context.sync(); // Ensure changes are applied
+        } catch (error) {
+            console.log("Eval error:", error);  // Improved error reporting
+            var errorMessage = document.createElement("p");
+            errorMessage.textContent = "Error executing JS code: " + error.message;
+            chatBox.appendChild(errorMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    });
+}
+
 });
